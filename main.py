@@ -67,7 +67,7 @@ def main():
     dihour = Label(Window, text=hour, bg='black', foreground=green, font='Poetsen\ One -20 bold')
     dihour.grid(column=0, row=0, sticky='w')
 
-    settingsButton = Button(Window, bg='black', fg=green, text='Settings', font='Poetsen\ One -20 bold')
+    settingsButton = Button(Window, bg='black', fg=green, text='Settings', font='Poetsen\ One -20 bold', command=Window.destroy)
     settingsButton.grid(column=1, row=0, sticky='e')
 
     View = ttk.Notebook(Window, padding=10)
