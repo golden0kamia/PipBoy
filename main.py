@@ -59,7 +59,7 @@ def main():
     Window = Tk()
     styles()
     Window.config(cursor='none')
-	Window.attributes('-fullscreen', True)
+    Window.attributes('-fullscreen', True)
     Window.geometry('800x480')
     Window.title('PipBoy 5000')
     Window.configure(bg='black')
@@ -91,14 +91,14 @@ def main():
                     activebackground=green,
                     activeforeground='black',
                     selectcolor='#050',
-                    width=20,
+                    width=18,
                     offrelief='flat').pack(anchor='w')
     List.pack(anchor='nw', side='left')
 
     Setting = Frame(Radio, bg='black')
     frequence = StringVar()
     frequence.set('88.0Mhz')
-    freq = Label(Setting, font='Poetsen\ one -80 bold', textvariable=frequence, bg='black', fg=green, width=8)
+    freq = Label(Setting, font='Poetsen\ one -75 bold', textvariable=frequence, bg='black', fg=green, width=8)
     freq.pack(anchor='center', pady=15, padx=32)
     prev = Button(Setting, text='<', font='Poetsen\ One -20 bold', bg='black', fg=green)
     prev.pack(anchor='w')
