@@ -84,9 +84,9 @@ def main():
     
     Window = Tk()
     styles()
-    #Window.config(cursor='none')
-    #Window.attributes('-fullscreen', True)
-    #Window.resizable(False, False)
+    Window.config(cursor='none')
+    Window.attributes('-fullscreen', True)
+    Window.resizable(False, False)
     Window.geometry('800x480')
     Window.title('PipBoy 5000')
     Window.configure(bg='black')
