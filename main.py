@@ -158,27 +158,27 @@ def main():
     
     imgprev = PhotoImage(file='asset/prev.png')
     imgprev = imgprev.subsample(3)
-    prev = Button(Setting, command=LaunchRadio.previous, text='|<', image=imgprev, font='Poetsen\ One -20 ', bg='black', fg=green, bd=0, activebackground='black', activeforeground=green)
+    prev = Button(Setting, command=LaunchRadio, text='|<', image=imgprev, font='Poetsen\ One -20 ', bg='black', fg=green, bd=0, activebackground='black', activeforeground=green)
     prev.grid(row=1, column=0, columnspan=2)
     
     imgpause = PhotoImage(file='asset/play.png')
     imgpause = imgpause.subsample(3)
-    pause = Button(Setting, command=LaunchRadio.play, text='>', image=imgpause, font='Poetsen\ One -20 ', bg='black', fg=green, bd=0, activebackground='black', activeforeground=green)
+    pause = Button(Setting, command=LaunchRadio, text='>', image=imgpause, font='Poetsen\ One -20 ', bg='black', fg=green, bd=0, activebackground='black', activeforeground=green)
     pause.grid(row=1, column=2)
     
     imgnext = PhotoImage(file='asset/prev.png')
     imgnext = imgnext.subsample(-3)
-    _next = Button(Setting, command=LaunchRadio.next, text='>|', image=imgnext, font='Poetsen\ One -20 ', bg='black', fg=green, bd=0, activebackground='black', activeforeground=green)
+    _next = Button(Setting, command=LaunchRadio, text='>|', image=imgnext, font='Poetsen\ One -20 ', bg='black', fg=green, bd=0, activebackground='black', activeforeground=green)
     _next.grid(row=1, column=3, columnspan=2)
     
     imgshiftL = PhotoImage(file='asset/shift.png')
     imgshiftL = imgshiftL.subsample(3)
-    shiftL = Button(Setting, command=LaunchRadio.shiftL, text='|<<', image=imgshiftL, font='Poetsen\ One -20 ', bg='black', fg=green, bd=0, activebackground='black', activeforeground=green)
+    shiftL = Button(Setting, command=LaunchRadio, text='|<<', image=imgshiftL, font='Poetsen\ One -20 ', bg='black', fg=green, bd=0, activebackground='black', activeforeground=green)
     shiftL.grid(row=2, column=1, columnspan=2, sticky='w')
     
     imgshiftR = PhotoImage(file='asset/shift.png')
     imgshiftR = imgshiftR.subsample(-3)
-    shiftR = Button(Setting, command=LaunchRadio.shiftR, text='>>|', image=imgshiftR, font='Poetsen\ One -20 ', bg='black', fg=green, bd=0, activebackground='black', activeforeground=green)
+    shiftR = Button(Setting, command=LaunchRadio, text='>>|', image=imgshiftR, font='Poetsen\ One -20 ', bg='black', fg=green, bd=0, activebackground='black', activeforeground=green)
     shiftR.grid(row=2, column=3, columnspan=2, sticky='w')
     
     Setting.grid(row=0, column=1, sticky='news')
