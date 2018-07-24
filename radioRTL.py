@@ -9,7 +9,8 @@ class Radio():
     resampled = 24000
     cmd = ''
     running = ''
-    command = None
+    updateCommand = None
+    
     saveFile = 'data/RadioList.rsl'
     radioList = [['91.0Mhz - RTS', 91.0, 'wbfm'],
                  ['91.6Mhz - COULEUR3', 91.6, 'wbfm'],
@@ -23,20 +24,20 @@ class Radio():
         if self.runRadio:
             if self.running != self.cmd:
                 self.stop()
-                os.system(self.cmd)
+                print(self.cmd)
                 self.running = self.cmd
                 self.runRadio = True
             else:
                 self.stop()
         else:
-            os.system(self.cmd)
+            print(self.cmd)
             self.running = self.cmd
             self.runRadio = True
         self.update()
         return
 
     def stop(self):
-        os.system('killall rtl_fm')
+        print('killall rtl_fm')
         self.running = ''
         self.runRadio = False
         return
@@ -89,32 +90,6 @@ class Radio():
         self.update()
         return
 
-    def update(self, commandNumber = 0):
-        if self.command:
-            if commandNumber != 0:
-                self.command[commandNumber]()
-            elif type(self.command) == list:
-                for x in range(len(self.command)):
-                    self.command[x]()
-            else:
-                self.command()
-        return
-
-    def config(self, frequence=None, modulation=None, sample=None, resample=None, command=None, play=False):
-        if frequence:
-            self.frequence = frequence
-        if modulation:
-            self.modulat = modulation
-        if sample:
-            self.sampled = sample
-        if resample:
-            self.resampled = resample
-        if command:
-            self.command = command
-        if play or self.runRadio:
-            self.play()
-        return
-
     def createcmd(self):
         return 'rtl_fm -f %s -M %s -s %s -r %s | aplay -f S16_LE -r %s &' %(int(self.frequence*1000000), self.modulat, self.sampled, self.resampled, self.resampled)
 
@@ -124,14 +99,51 @@ class Radio():
         if self.frequence <= self.minFreq:
             self.frequence = self.minFreq
 
+
     def removeSave(self, index):
-        self.radioList.pop(index)
+        try:
+            self.radioList.pop(index)
+        except:
+            print('no radio selected or the list are empty')
+        
+        self.update()
+        return
 
     def saveRadio(self):
         radio = ['%sMhz'%self.frequence, self.frequence, self.modulat]
         self.radioList.append(radio)
+        
+        self.update()
+        return
 
-    def __init__(self, frequence=87.5, modulation='wbfm', sample=48000, resample=24000, command=None, saveFile='data/RadioList.rsl'):
+
+    def config(self, frequence=None, modulation=None, sample=None, resample=None, updateCommand=None, play=False):
+        if frequence:
+            self.frequence = frequence
+        if modulation:
+            self.modulat = modulation
+        if sample:
+            self.sampled = sample
+        if resample:
+            self.resampled = resample
+        if updateCommand:
+            self.updateCommand = updateCommand
+        if play or self.runRadio:
+            self.play()
+        return
+    
+    def update(self, commandNumber = 0):
+        if self.updateCommand:
+            if commandNumber != 0:
+                self.updateCommand[commandNumber]()
+            elif type(self.updateCommand) == list:
+                for x in range(len(self.updateCommand)):
+                    self.updateCommand[x]()
+            else:
+                self.updateCommand()
+        return
+
+    def __init__(self, frequence=87.5, modulation='wbfm', sample=48000, resample=24000, updateCommand=None, saveFile='data/RadioList.rsl'):
 
         def readSave():
             try:
@@ -150,7 +162,7 @@ class Radio():
         self.modulat = modulation
         self.sampled = sample
         self.resampled = resample
-        self.command = command
+        self.command = updateCommand
         self.saveFile = saveFile
         readSave()
         return
