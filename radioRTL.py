@@ -23,20 +23,20 @@ class Radio():
         if self.runRadio:
             if self.running != self.cmd:
                 self.stop()
-                print(self.cmd)
+                os.system(self.cmd)
                 self.running = self.cmd
                 self.runRadio = True
             else:
                 self.stop()
         else:
-            print(self.cmd)
+            os.system(self.cmd)
             self.running = self.cmd
             self.runRadio = True
         self.update()
         return
 
     def stop(self):
-        print('killall rtl_fm')
+        os.system('killall rtl_fm')
         self.running = ''
         self.runRadio = False
         return

@@ -40,23 +40,45 @@ def styles():
         }
     )
     style.theme_use("PipBoy")
-
+listage = []
 def main():
     myRadio = radioRTL.Radio()
     
     def sethour():
         hour.set(time.strftime('%H:%M / %d.%m.%Y'))
-        dihour.after(9995, sethour)
+        dihour.after(10000, sethour)
 
     def updateTK():
+        global listage
         frequence.set('%sMhz'%myRadio.frequence)
         if myRadio.runRadio:
             pause.config(image=imgpause)
         else:
             pause.config(image=imgplay)
             radioSelect.set(100)
+            
+        for rad in listage:
+            rad.destroy()
+        listage = []
         
-    myRadio.config(command=updateTK)
+        for x in range(len(myRadio.radioList)):
+            listage.append(Radiobutton(List,
+                                       text=myRadio.radioList[x][0],
+                                       variable=radioSelect, value=x,
+                                       command=lambda:myRadio.play(radioSelect.get()+1),
+                                       indicatoron=False,
+                                       font='Poetsen\ One -22',
+                                       bg='black',
+                                       fg=green,
+                                       activebackground='black',
+                                       activeforeground=green,
+                                       selectcolor='#050',
+                                       width=20,
+                                       offrelief='flat',
+                                       bd=0))
+            listage[x].pack(anchor='w')
+
+    myRadio.config(updateCommand=updateTK)
 
 ####    
     Window = Tk()
@@ -92,28 +114,13 @@ def main():
 ###-    
     Radio = Frame(View, bg='black')
 ##--  
-    List = Frame(Radio, bg='black', height=390)
+    List = Canvas(Radio, bg='black', height=390)
     #listframe = Frame(List, bg='black')
     radioSelect = IntVar()
     radioSelect.set(100)
-    for x in range(len(myRadio.radioList)):
-        Radiobutton(List,
-                    text=myRadio.radioList[x][0],
-                    variable=radioSelect, value=x,
-                    command=lambda:myRadio.play(radioSelect.get()+1),
-                    indicatoron=False,
-                    font='Poetsen\ One -22',
-                    bg='black',
-                    fg=green,
-                    activebackground='black',
-                    activeforeground=green,
-                    selectcolor='#050',
-                    width=20,
-                    offrelief='flat',
-                    bd=0).pack(anchor='w')
     List.grid(row=0, column=0, sticky='nw')
 ##--    
-    '''scrollradio = Scrollbar(Radio, orient='vertical', command=List.yview,
+    '''scrollradio = Scrollbar(List, orient='vertical', command=List.yview,
                             activebackground='black',
                             bg='black',
                             highlightbackground='black',
@@ -178,6 +185,7 @@ def main():
     View.add(Map, text='Map')
     View.grid(column=0, row=1, columnspan=2)
 
+    updateTK()
     Window.mainloop()
 
 main()
