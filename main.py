@@ -141,7 +141,7 @@ def main():
     frequence.set('87.5Mhz')
     
     freq = Label(Setting, font='Poetsen\ one -80', textvariable=frequence, bg='black', fg=green, bd=10, relief='sunken', width=8, justify='center')
-    freq.grid(row=1, column=0, columnspan=5, sticky='e', ipady=30, padx=20, pady=5)
+    freq.grid(row=1, column=0, columnspan=5, sticky='e', ipady=30, padx=30, pady=5)
     
     imgprev = PhotoImage(file='asset/prev.png')
     imgprev = imgprev.subsample(3)
