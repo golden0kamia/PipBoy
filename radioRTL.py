@@ -150,7 +150,7 @@ class Radio():
                 file = open(self.saveFile, mode='r')
                 read = file.readlines()
                 parti = read.split('\n')
-                for li in part:
+                for li in parti:
                     sav = li.split(',')
                     sav[1] = float(sav[1])
                     self.radioList.append(sav)
