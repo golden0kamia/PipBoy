@@ -1,6 +1,7 @@
 QWidget{
     background-color: black;
-    color: green
+    color: green;
+    font-size: 20px;
 }
 
 QPushButton{
