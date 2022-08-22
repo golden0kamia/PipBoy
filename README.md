@@ -11,3 +11,6 @@ A PipBoy sofware for a real one on raspberry
 - [ ] NFC reader, writer, emulator
 - [ ] Wifi, Bluetooth connectivity
 - [ ] Keyboard emulator
+- [ ] System monitoring
+- [ ] Meteo
+- [ ] Terminal
