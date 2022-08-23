@@ -1,22 +1,10 @@
 import sys
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import QProcess
-from PyQt5.QtGui import QWindow
 
 def say_hello():
     print("Hello wolrd!")
 
 app = QApplication(sys.argv)
-
-win = QWidget()
-winID = int(win.winId())
-
-sub_win = QWindow.fromWinId(winID)
-container = QWidget.createWindowContainer(sub_win)
-sub_win_id = int(container.winId())
-
-process = QProcess(container)
-process.start("navit")
 
 with open("style.qss", 'r') as f:
     _style = f.read()
@@ -46,26 +34,61 @@ topBar.addSpacerItem(topBarSpacer)
 
 #Settings button
 settingsButton = QPushButton()
-settingsButton.setText("Click me!")
+settingsButton.setText("Settings")
 settingsButton.clicked.connect(say_hello)
 topBar.addWidget(settingsButton)
 
 #Radio tab
 radioW = QWidget()
-radio1 = QPushButton("Radio 1", radioW)
-radio2 = QPushButton("Radio 2", radioW)
+radioLayout = QGridLayout(radioW)
+radioList = QListWidget()
+radioList.addItems(["LFM", "One FM", "RTS"])
+radioList.currentItemChanged.connect(say_hello)
+radioLayout.addWidget(radioList, 0, 0, 3, 1)
+radioFreq = QLabel("107.25")
+radioLayout.addWidget(radioFreq, 0, 1, 1, 5)
+radioPrevButton = QPushButton("F Prev")
+radioLayout.addWidget(radioPrevButton, 1, 1)
+radioPrevButton = QPushButton("Prev")
+radioLayout.addWidget(radioPrevButton, 2, 2)
+radioPlayButton = QPushButton("Play")
+radioLayout.addWidget(radioPlayButton, 1, 3)
+radioNextButton = QPushButton("Next")
+radioLayout.addWidget(radioNextButton, 2, 4)
+radioNextButton = QPushButton("F Next")
+radioLayout.addWidget(radioNextButton, 1, 5)
 
 #Navit maps tab
-
+mapW = QWidget()
 
 #Calendar tab
 cal = QCalendarWidget()
 
+#Remote tab
+remoteW = QWidget()
+
+#NFC tab
+nfcW = QWidget()
+
+#Wireless settings tab
+wirelessW = QWidget()
+
+#Monitor tab
+monitorW = QWidget()
+
+#Terminal tab
+terminalW = QWidget()
+
 #Tabs wigets
 tabs = QTabWidget(root)
 tabs.addTab(radioW, "Radio")
-tabs.addTab(container, "Map")
+tabs.addTab(mapW, "Map")
 tabs.addTab(cal, "Calendar")
+tabs.addTab(remoteW, "Remote")
+tabs.addTab(nfcW, "NFC")
+tabs.addTab(wirelessW, "Wireless")
+tabs.addTab(monitorW, "Monitor")
+tabs.addTab(terminalW, "Terminal")
 mainVbox.addWidget(tabs)
 
 sys.exit(app.exec_())
